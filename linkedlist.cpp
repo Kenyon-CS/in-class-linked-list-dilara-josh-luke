@@ -38,6 +38,20 @@ class LinkedList {
         head = newNode;
     }
 
+    // Remove and return the first element in the list
+    T lfirst() {
+        if (head == nullptr) {
+            // Returns default if list is empty
+            return T();
+        }
+
+        node<T>* temp = head;
+        T firstValue = head->data;
+        head = head->next; // Move the head to the next node
+        delete temp;       // Delete the old head node
+        return firstValue; // Return the removed node's data
+    }
+
     // Remove first occurrence of value
     void remove(T value) {
         if (head == nullptr) return;
@@ -92,9 +106,15 @@ int main() {
     std::cout << "Linked List: ";
     list.print();
 
-    list.remove(2);
-    std::cout << "After removing 2: ";
+    int firstElement = list.lfirst();
+    std::cout << "First element removed: " << firstElement << std::endl;
+
+    std::cout << "Linked List after removing the first element: ";
     list.print();
+
+//    list.remove(2);
+//    std::cout << "After removing 2: ";
+//    list.print();
 
     return 0;
 }
